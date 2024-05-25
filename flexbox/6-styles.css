@@ -699,3 +699,28 @@ ul.row {
     font-size: 10rem;
     z-index: -1;
 }
+
+
+/* Variables section */
+
+:root {
+    --nav-item-margin: 0 0 0 2rem;
+    /* Changed the value to 0 0 0 2rem */
+}
+
+
+/* Navbar section */
+
+.nav {
+    display: flex;
+    /* Set display property to flex */
+}
+
+.nav .nav-item {
+    /* Remove the display declaration from here */
+}
+
+.nav .nav-item+.nav-item {
+    margin: var(--nav-item-margin);
+    /* Move margin declaration here */
+}
