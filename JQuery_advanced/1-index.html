@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 1</title>
+    <!-- Load jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+</head>
+
+<body>
+    <script type="application/javascript">
+        // Function to create and append a paragraph element using jQuery
+        function createTextElement() {
+            // Create a <p> element with Lorem Ipsum text
+            var loremIpsum =
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in diam risus. Nunc sit amet euismod ipsum. Aenean tempus ex sed est volutpat, sed sodales velit tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin auctor sollicitudin eleifend. Vivamus porta enim vitae mauris commodo, vitae tempor tellus elementum. Quisque sed pellentesque nulla, at eleifend nisi. Phasellus eget tincidunt ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+            var paragraph = $("<p>").text(loremIpsum); // Create a <p> element with the Lorem Ipsum text
+            $("body").append(paragraph); // Append the <p> element to the <body> of the page
+        }
+
+        // Call the function to create and append the paragraph element
+        createTextElement();
+    </script>
+</body>
+
+</html>

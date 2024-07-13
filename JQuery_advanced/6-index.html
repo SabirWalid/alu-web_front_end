@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 6</title>
+    <!-- Load jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <style>
+        /* CSS for the remove button */
+        
+        .remove-button {
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="application/javascript">
+        // Function to create an empty family tree table
+        function createFamilyTree() {
+            $("body").append(
+                $("<table>").append(
+                    $("<thead>").append(
+                        $("<tr>").append(
+                            $("<th>").text("Firstname"),
+                            $("<th>").text("Lastname")
+                        )
+                    ),
+                    $("<tbody>")
+                )
+            );
+        }
+
+        // Function to add a new member row with remove functionality
+        function addNewMember(firstName, lastName, position) {
+            // Create a new row with three cells
+            var newRow = $("<tr>").append(
+                $("<td>").text(firstName),
+                $("<td>").text(lastName),
+                $("<td>")
+                .addClass("remove-button")
+                .text("(x)")
+                .click(function() {
+                    $(this).parent("tr").remove(); // Remove the row on click
+                })
+            );
+
+            // Determine where to add the new row based on position
+            if (position === "before") {
+                $("tbody").prepend(newRow); // Add row at the top
+            } else {
+                $("tbody").append(newRow); // Add row at the bottom (default)
+            }
+        }
+
+        // Function to create the form for adding new members
+        function createForm() {
+            // Create form elements
+            var form = $("<form>").append(
+                $("<input>").attr("type", "text").attr("placeholder", "First name"),
+                $("<input>")
+                .attr("type", "text")
+                .attr("placeholder", "Last name")
+                .css("margin-left", "10px"),
+                $("<select>").append(
+                    $("<option>").attr("value", "before").text("Before"),
+                    $("<option>").attr("value", "after").text("After")
+                ),
+                $("<input>").attr("type", "submit").val("Add Member")
+            );
+
+            // Handle form submission
+            form.on("submit", function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var firstName = $(this)
+                    .find('input[type="text"]:nth-of-type(1)')
+                    .val();
+                var lastName = $(this)
+                    .find('input[type="text"]:nth-of-type(2)')
+                    .val();
+                var position = $(this).find("select").val();
+                addNewMember(firstName, lastName, position); // Call addNewMember function
+                $(this).trigger("reset"); // Reset form inputs
+            });
+
+            // Append form before the table
+            $("table").before(form);
+        }
+
+        // Call function to create the family tree table
+        createFamilyTree();
+
+        // Call function to create the form for adding new members
+        createForm();
+    </script>
+</body>
+
+</html>

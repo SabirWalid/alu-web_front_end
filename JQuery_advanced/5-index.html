@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 5</title>
+    <!-- Load jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <style>
+        /* CSS for the remove button */
+        
+        .remove-button {
+            background-color: orange;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="application/javascript">
+        // Function to create an empty family tree table
+        function createFamilyTree() {
+            $("body").append(
+                $("<table>").append(
+                    $("<thead>").append(
+                        $("<tr>").append(
+                            $("<th>").text("Firstname"),
+                            $("<th>").text("Lastname")
+                        )
+                    ),
+                    $("<tbody>")
+                )
+            );
+        }
+
+        // Function to add a new member row with remove functionality
+        function addNewMember(firstName, lastName) {
+            // Create a new row with three cells
+            var newRow = $("<tr>").append(
+                $("<td>").text(firstName),
+                $("<td>").text(lastName),
+                $("<td>")
+                .addClass("remove-button")
+                .text("(x)")
+                .click(function() {
+                    $(this).parent("tr").remove(); // Remove the row on click
+                })
+            );
+
+            // Append the new row to the tbody of the table
+            $("tbody").append(newRow);
+        }
+
+        // Call function to create the family tree table
+        createFamilyTree();
+
+        // Generate the initial table with fake data
+        addNewMember("Guillaume", "Salva");
+        addNewMember("Arielle", "Snizt");
+        addNewMember("Fanette", "Snizt");
+        addNewMember("Gerard", "Snizt");
+        addNewMember("Victor", "Salva");
+    </script>
+</body>
+
+</html>

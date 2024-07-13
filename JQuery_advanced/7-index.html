@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 7</title>
+    <!-- Load jQuery from CDN (minified version with AJAX support) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <script type="application/javascript">
+        // Function to create the search form and handle submission
+        function createSearchForm() {
+            // Create form elements
+            var form = $("<form>").append(
+                $("<input>").attr("type", "text"),
+                $("<input>").attr("type", "submit").val("Search")
+            );
+
+            // Handle form submission
+            form.on("submit", function(event) {
+                event.preventDefault(); // Prevent default form submission
+                var searchText = $(this).find('input[type="text"]').val();
+                queryWikipedia(searchText); // Call queryWikipedia with search text
+            });
+
+            // Create an empty <ul> element to hold search results
+            var resultList = $("<ul>");
+
+            // Append form and result list to the body
+            $("body").append(form, resultList);
+        }
+
+        // Function to add a new article item to the result list
+        function addNewArticle(id, title, snippet) {
+            // Create li element
+            var listItem = $("<li>");
+
+            // Create first paragraph with formatted text
+            var firstParagraph = $("<p>").html(
+                "<span>ID - </span><b>" + title + "</b>"
+            );
+            listItem.append(firstParagraph);
+
+            // Create second paragraph with snippet (HTML formatted from Wikipedia)
+            var secondParagraph = $("<p>").html(snippet);
+            listItem.append(secondParagraph);
+
+            // Append li to the result list
+            $("ul").append(listItem);
+        }
+
+        // Function to query Wikipedia using AJAX
+        function queryWikipedia(search) {
+            // API endpoint and parameters for Wikipedia search
+            var apiUrl = "https://en.wikipedia.org/w/api.php";
+            var params = {
+                action: "query",
+                list: "search",
+                srsearch: search,
+                format: "json",
+            };
+
+            // AJAX request to fetch Wikipedia data
+            $.ajax({
+                url: apiUrl,
+                data: params,
+                dataType: "jsonp",
+                success: function(response) {
+                    // Iterate over each search result and call addNewArticle function
+                    response.query.search.forEach(function(result) {
+                        addNewArticle(result.pageid, result.title, result.snippet);
+                    });
+                },
+                error: function(error) {
+                    console.error("Error fetching data from Wikipedia:", error);
+                },
+            });
+        }
+
+        // Call function to create the search form when the page loads
+        $(document).ready(function() {
+            createSearchForm();
+        });
+    </script>
+</body>
+
+</html>
