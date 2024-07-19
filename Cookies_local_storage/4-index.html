@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Example</title>
+    <style>
+        .logout-link {
+            font-style: italic;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+    <div id="login-form">
+        <h2>Login</h2>
+        <input type="text" id="firstname" placeholder="First Name" />
+        <input type="email" id="email" placeholder="Email" />
+        <button onclick="setCookiesAndShowWelcomeMessage()">Log me in</button>
+    </div>
+    <script src="/dist/main.js"></script>
+</body>
+
+</html>
